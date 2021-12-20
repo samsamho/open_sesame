@@ -35,9 +35,8 @@ export default function SignupScreen({ navigation }) {
             title="Signup"
             modeValue="contained"
             labelStyle={styles.loginButtonLabel}
-            onPress={() => {
-
-            }}
+            onPress={() => register(displayName, email, password)}
+            }
         />
         <IconButton
             icon="keyboard-backspace"
