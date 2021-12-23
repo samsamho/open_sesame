@@ -29,7 +29,6 @@ export default function LoginScreen({ navigation }) {
             modeValue="contained"
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
-
             }}
         />
         <FormButton
