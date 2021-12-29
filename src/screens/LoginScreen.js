@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, StyleSheet, View } from 'react-native';
 import { Button, Title, TextInput } from 'react-native-paper';
 
 export default function LoginScreen({ navigation }) {
@@ -15,7 +15,7 @@ export default function LoginScreen({ navigation }) {
             value={email}
             numberOfLines={1}
             autoCapitalize="none"
-            onChangeText={(userEmail) => setEmail(userEmail)}
+            onChangeText={(email) => setEmail(email)}
         />
         <TextInput
             label="Password"
@@ -23,23 +23,24 @@ export default function LoginScreen({ navigation }) {
             value={password}
             numberOfLines={1}
             secureTextEntry={true}
-            onChangeText={(userPassword) => setPassword(userPassword)}
+            onChangeText={(password) => setPassword(password)}
         />
         <Button
             mode="contained"
-            style={styles.input}
-            labelStyle={styles.loginButtonLabel}
-            onPress={() => {}}
             style={styles.button}
             contentStyle={styles.buttonContainer}
+            labelStyle={styles.loginButtonLabel}
+            onPress={() => {
+              
+            }}
         > Login </Button>
         <Button
             mode="text"
             uppercase={false}
-            labelStyle={styles.navButtonText}
-            onPress={() => navigation.navigate('Signup')}
             style={styles.button}
             contentStyle={styles.buttonContainer}
+            labelStyle={styles.navButtonText}
+            onPress={() => navigation.navigate('Signup')}
         > Sign up here </Button>
       </View>
   );
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonContainer: {
-    width: width / 2,
+    width: width / 3,
     height: height / 15,
   },
   container: {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     marginBottom: 10,
-    width: width / 1.5,
+    width: width / 2,
     height: height / 15,
   },
   loginButtonLabel: {
