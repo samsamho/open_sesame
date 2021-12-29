@@ -4,7 +4,7 @@ import { firebase } from '../firebase';
 
 export const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -12,11 +12,9 @@ export const AuthProvider = ({ children }) => {
       <AuthContext.Provider
           value={{
             user,
-            setUser,
             loading,
-            setLoading,
             login: async (email, password) => {
-
+              console.log(email, password)
             },
             register: async (displayName, email, password) => {
               setLoading(true);

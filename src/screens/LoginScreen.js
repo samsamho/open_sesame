@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Alert, Dimensions, StyleSheet, View } from 'react-native';
 import { Button, Title, TextInput } from 'react-native-paper';
+
+import { AuthContext } from '../contexts/AuthContext'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { login } = useContext(AuthContext)
 
   return (
       <View style={styles.container}>
@@ -31,7 +35,7 @@ export default function LoginScreen({ navigation }) {
             contentStyle={styles.buttonContainer}
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
-              
+              login(email, password)
             }}
         > Login </Button>
         <Button
