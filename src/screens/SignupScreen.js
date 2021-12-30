@@ -54,7 +54,7 @@ export default function SignupScreen({ navigation }) {
 
   return (
       <View style={styles.container}>
-        <Title style={styles.titleText}>Let's get started!</Title>
+        <Title style={styles.titleText}>Sign up new account</Title>
         <TextInput
             label="Display Name"
             style={styles.input}
@@ -133,9 +133,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     marginBottom: 10,
-  },
-  navButtonText: {
-    fontSize: 18,
   },
   navButton: {
     marginTop: 10,
