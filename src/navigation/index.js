@@ -1,7 +1,7 @@
 import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import { AuthContextProvider } from '../contexts/AuthContext';
+import AuthContextProvider from '../contexts/AuthContext';
 import Routes from './Routes';
 
 export default function Providers() {

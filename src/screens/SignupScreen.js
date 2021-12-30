@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import { Button, IconButton, TextInput, Title } from 'react-native-paper';
+import { Button, IconButton, Text, TextInput, Title } from 'react-native-paper';
+
+import { AuthContext } from '../contexts/AuthContext'
+
 
 export default function SignupScreen({ navigation }) {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [signupText, setSignupText] = useState('');
+
+  const { user, loading, register } = useContext(AuthContext)
 
   return (
       <View style={styles.container}>
@@ -31,12 +37,31 @@ export default function SignupScreen({ navigation }) {
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
         />
+        <Text>{ signupText }</Text>
         <Button
             mode="contained"
             style={styles.button}
             contentStyle={styles.buttonContainer}
             labelStyle={styles.loginButtonLabel}
-            onPress={() => register(displayName, email, password)}
+            onPress={async () => {
+              register(displayName, email, password).then(({ userCredential, error }) => {
+                if (userCredential) {
+                  setSignupText("Sign up success. Please check your email for verification.")
+                  user = userCredential.user
+                  console.log(user)
+                }
+                else {
+                  switch (error.code) {
+                    case "auth/email-already-in-use":
+                      setSignupText("This email is already registered! If you forgot your password, please reset your password in the login page.")
+                      break
+                    default:
+                      setSignupText("Signup failed: " + error.code)
+                  }
+                }
+              })
+              
+            }}
         >Sign Up</Button>
         <IconButton
             color="#5b3a70"

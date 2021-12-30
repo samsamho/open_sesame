@@ -1,12 +1,22 @@
 import React, { createContext, useState } from 'react';
 
-import { firebase } from '../firebase';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext();
 
-export const AuthContextProvider = ({ children }) => {
+const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // onAuthStateChanged = (user) => {
+  //   setUser(user);
+  //   if (initializing) setInitializing(false);
+  // }
+
+  // useEffect(() => {
+  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
 
   return (
       <AuthContext.Provider
@@ -18,22 +28,17 @@ export const AuthContextProvider = ({ children }) => {
             },
             register: async (displayName, email, password) => {
               setLoading(true);
-
-              try {
-                await firebase
-                .auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then((credential) => {
-                  credential.user
-                  .updateProfile({ displayName: displayName })
-                  .then(async () => {
-
-                  });
+              const auth = getAuth();
+              let obj = {}
+              await createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                  obj.userCredential = userCredential
+                })
+                .catch((error) => {
+                  obj.error = error
                 });
-              } catch (e) {
-                console.log(e);
-              }
               setLoading(false);
+              return obj
             },
             logout: async () => {
 
@@ -44,3 +49,5 @@ export const AuthContextProvider = ({ children }) => {
       </AuthContext.Provider>
   );
 };
+
+export default AuthContextProvider
