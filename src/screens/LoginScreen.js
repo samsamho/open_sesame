@@ -46,6 +46,14 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.navButtonText}
             onPress={() => navigation.navigate('Signup')}
         > Sign up here </Button>
+        <Button
+            mode="text"
+            uppercase={false}
+            style={styles.button}
+            contentStyle={styles.buttonContainer}
+            labelStyle={styles.navButtonText}
+            onPress={() => navigation.navigate('Voiceprint')}
+        > Temporary Dev Button (for SV) </Button>
       </View>
   );
 }
