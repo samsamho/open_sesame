@@ -33,6 +33,7 @@ const AuthContextProvider = ({ children }) => {
               await createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                   obj.userCredential = userCredential
+                  setUser(userCredential.user)
                 })
                 .catch((error) => {
                   obj.error = error

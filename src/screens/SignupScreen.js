@@ -8,10 +8,49 @@ import { AuthContext } from '../contexts/AuthContext'
 export default function SignupScreen({ navigation }) {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
   const [signupText, setSignupText] = useState('');
 
-  const { user, loading, register } = useContext(AuthContext)
+  const { register } = useContext(AuthContext)
+
+  const validateEmail = () => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(email) === false) {
+      setSignupText("Please enter a valid email address.")
+      return false;
+    } else {
+      setSignupText("")
+      return true;
+    }
+  }
+
+  const validatePassword = () => {
+    if (password1 !== password2) {
+      setSignupText("Your passwords do not match.")
+      return false
+    } else {
+      setSignupText("")
+      return true;
+    }
+  }
+
+  const handleRegister = () => {
+    register(displayName, email, password1).then(({ userCredential, error }) => {
+      if (userCredential) {
+        setSignupText("Sign up success. Please check your email for verification.")
+      }
+      else {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setSignupText("This email is already registered! If you forgot your password, please reset your password in the login page.")
+            break
+          default:
+            setSignupText("Signup failed: " + error.code)
+        }
+      }
+    })
+  }
 
   return (
       <View style={styles.container}>
@@ -33,9 +72,16 @@ export default function SignupScreen({ navigation }) {
         <TextInput
             label="Password"
             style={styles.input}
-            value={password}
+            value={password1}
             secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={(password1) => setPassword1(password1)}
+        />
+        <TextInput
+            label="Confirm Password"
+            style={styles.input}
+            value={password2}
+            secureTextEntry={true}
+            onChangeText={(password2) => setPassword2(password2)}
         />
         <Text>{ signupText }</Text>
         <Button
@@ -44,23 +90,8 @@ export default function SignupScreen({ navigation }) {
             contentStyle={styles.buttonContainer}
             labelStyle={styles.loginButtonLabel}
             onPress={async () => {
-              register(displayName, email, password).then(({ userCredential, error }) => {
-                if (userCredential) {
-                  setSignupText("Sign up success. Please check your email for verification.")
-                  user = userCredential.user
-                  console.log(user)
-                }
-                else {
-                  switch (error.code) {
-                    case "auth/email-already-in-use":
-                      setSignupText("This email is already registered! If you forgot your password, please reset your password in the login page.")
-                      break
-                    default:
-                      setSignupText("Signup failed: " + error.code)
-                  }
-                }
-              })
-              
+              if (validateEmail() && validatePassword())
+                handleRegister()
             }}
         >Sign Up</Button>
         <IconButton
