@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import AudioRecorderPlayer from 'react-native-audio-recorder-player'
+// import AudioRecorderPlayer from 'react-native-audio-recorder-player'
 
 export const VoiceAuthContext = createContext();
 
@@ -8,7 +8,7 @@ const VoiceAuthContextProvider = ({ children }) => {
   const [recordSecs, setRecordSecs] = useState()
   const [recordTime, setRecordTime] = useState()
 
-  const audioRecorderPlayer = new AudioRecorderPlayer()
+  // const audioRecorderPlayer = new AudioRecorderPlayer()
 
   
   const onStartRecord = async () => {

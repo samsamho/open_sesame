@@ -6,7 +6,7 @@ import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
 
 export default function VoiceEnrollScreen({ navigation }) {
-  // const { audioRecorderPlayer, recording, recordSecs, recordTime, onStartRecord, onStopRecord } = useContext(VoiceAuthContext)
+  const { audioRecorderPlayer, recording, recordSecs, recordTime, onStartRecord, onStopRecord } = useContext(VoiceAuthContext)
 
   return (
       <View style={styles.container}>
