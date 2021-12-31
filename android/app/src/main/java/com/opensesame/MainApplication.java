@@ -17,6 +17,8 @@ import expo.modules.ReactNativeHostWrapper;
 
 import com.facebook.react.bridge.JSIModulePackage;
 
+import com.dooboolab.audiorecorderplayer.RNAudioRecorderPlayerPackage;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
