@@ -52,8 +52,8 @@ export default function LoginScreen({ navigation }) {
             style={styles.button}
             contentStyle={styles.buttonContainer}
             labelStyle={styles.navButtonText}
-            onPress={() => navigation.navigate('Voiceprint')}
-        > Temporary Dev Button (for SV) </Button>
+            onPress={() => navigation.navigate('VoiceEnroll')}
+        > Temporary Dev Button (for SV Enroll) </Button>
       </View>
   );
 }

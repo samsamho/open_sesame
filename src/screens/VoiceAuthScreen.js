@@ -5,7 +5,7 @@ import { Button, IconButton, Text, TextInput, Title } from 'react-native-paper';
 import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
 export default function VoiceAuthScreen({ navigation }) {
-  const { user } = useContext(VoiceAuthContext)
+  useContext(VoiceAuthContext)
 
   return (
       <View style={styles.container}>

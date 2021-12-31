@@ -2,13 +2,16 @@ import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import AccountAuthContextProvider from '../contexts/AccountAuthContext';
+import VoiceAuthContextProvider from '../contexts/VoiceAuthContext';
 import Routes from './Routes';
 
 export default function Providers() {
   return (
       <PaperProvider theme={theme}>
         <AccountAuthContextProvider>
-          <Routes />
+          <VoiceAuthContextProvider>
+            <Routes />
+          </VoiceAuthContextProvider>
         </AccountAuthContextProvider>
       </PaperProvider>
   );
