@@ -35,7 +35,6 @@ const VoiceAuthContextProvider = ({ children }) => {
   return (
       <VoiceAuthContext.Provider
           value={{
-            audioRecorderPlayer,
             recording,
             recordSecs,
             recordTime,
