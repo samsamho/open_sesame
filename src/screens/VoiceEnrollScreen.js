@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Button, IconButton, Text, TextInput, Title } from 'react-native-paper';
 
-import { AuthContext } from '../contexts/AuthContext'
+import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
-export default function VoiceprintScreen({ navigation }) {
-  const { user } = useContext(AuthContext)
+export default function VoiceEnrollScreen({ navigation }) {
+  const { user } = useContext(VoiceAuthContext)
 
   return (
       <View style={styles.container}>

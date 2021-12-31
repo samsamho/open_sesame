@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Button, IconButton, Text, TextInput, Title } from 'react-native-paper';
 
-import { AuthContext } from '../contexts/AuthContext'
+import { AccountAuthContext } from '../contexts/AccountAuthContext'
 
 
 export default function SignupScreen({ navigation }) {
@@ -12,7 +12,7 @@ export default function SignupScreen({ navigation }) {
   const [password2, setPassword2] = useState('');
   const [signupText, setSignupText] = useState('');
 
-  const { register } = useContext(AuthContext)
+  const { register } = useContext(AccountAuthContext)
 
   const validateEmail = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
