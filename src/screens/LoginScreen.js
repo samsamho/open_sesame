@@ -36,6 +36,7 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
               login(email, password)
+              navigation.navigate('Chat')
             }}
         > Login </Button>
         <Button
