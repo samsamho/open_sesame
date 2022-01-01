@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-export const AuthContext = createContext();
+export const AccountAuthContext = createContext();
 
-const AuthContextProvider = ({ children }) => {
+const AccountAuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +18,7 @@ const AuthContextProvider = ({ children }) => {
   // }, []);
 
   return (
-      <AuthContext.Provider
+      <AccountAuthContext.Provider
           value={{
             user,
             loading,
@@ -46,8 +46,8 @@ const AuthContextProvider = ({ children }) => {
           }}
       >
         {children}
-      </AuthContext.Provider>
+      </AccountAuthContext.Provider>
   );
 };
 
-export default AuthContextProvider
+export default AccountAuthContextProvider
