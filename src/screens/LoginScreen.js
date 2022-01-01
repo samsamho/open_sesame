@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Alert, Dimensions, StyleSheet, View } from 'react-native';
 import { Button, Title, TextInput } from 'react-native-paper';
 
-import { AuthContext } from '../contexts/AuthContext'
+import { AccountAuthContext } from '../contexts/AccountAuthContext'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useContext(AuthContext)
+  const { login } = useContext(AccountAuthContext)
 
   return (
       <View style={styles.container}>
@@ -36,6 +36,7 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
               login(email, password)
+              navigation.navigate('Chat')
             }}
         > Login </Button>
         <Button
@@ -46,6 +47,14 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.navButtonText}
             onPress={() => navigation.navigate('Signup')}
         > Sign up here </Button>
+        <Button
+            mode="text"
+            uppercase={false}
+            style={styles.button}
+            contentStyle={styles.buttonContainer}
+            labelStyle={styles.navButtonText}
+            onPress={() => navigation.navigate('VoiceEnroll')}
+        > Temporary Dev Button (for SV Enroll) </Button>
       </View>
   );
 }
