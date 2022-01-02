@@ -5,7 +5,7 @@ import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 import ChatScreen from '../screens/ChatScreen';
 import VoiceEnrollScreen from '../screens/VoiceEnrollScreen'
-import VoiceAuthScreen from '../screens/VoiceAuthScreen'
+import VoiceVerificationScreen from '../screens/VoiceVerificationScreen'
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -20,7 +20,7 @@ export default function AuthStack() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="VoiceEnroll" component={VoiceEnrollScreen} />
-        <Stack.Screen name="VoiceAuth" component={VoiceAuthScreen} />
+        <Stack.Screen name="VoiceVerification" component={VoiceVerificationScreen} />
         <Stack.Screen name="Chat" component={ChatScreen}/>
       </Stack.Navigator>
   );
