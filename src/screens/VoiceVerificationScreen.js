@@ -61,7 +61,4 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 10,
   },
-  navButton: {
-    marginTop: 10,
-  },
 });
