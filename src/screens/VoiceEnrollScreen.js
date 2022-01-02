@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { Button, IconButton,Title } from 'react-native-paper'
+import { Button, Title } from 'react-native-paper'
 
 import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
@@ -22,13 +22,6 @@ export default function VoiceEnrollScreen({ navigation }) {
             onPress={() => recording ? onStopRecord() : onStartRecord()}
           >{recording ? "Stop" : "Start"}</Button>
         </TouchableOpacity>
-        <IconButton
-            color="#5b3a70"
-            onPress={() => navigation.goBack()}
-            icon="keyboard-backspace"
-            size={30}
-            style={styles.navButton}
-        />
       </View>
   );
 }
