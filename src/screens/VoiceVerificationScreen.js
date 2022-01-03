@@ -4,24 +4,24 @@ import { Button, Title } from 'react-native-paper'
 
 import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
-export default function VoiceEnrollScreen({ navigation }) {
+export default function VoiceVerificationScreen({ navigation }) {
   const { recording, recordSecs, recordTime, onStartRecord, onStopRecord } = useContext(VoiceAuthContext)
 
   return (
-      <View style={styles.container}>
-        <Title style={styles.titleText}>Enroll your voiceprint</Title>
-        <Text style={styles.instructions}>Press the button below to start recording your voice.</Text>
-        <Text style={styles.instructions}>Press the button again to stop recording.</Text>
-        <Text style={styles.instructions}>Your voice will be saved in your account.</Text>
-        <TouchableOpacity style={styles.recordOverlay} >
-          <Button
-            mode="contained"
-            style={styles.recordButton}
-            labelStyle={styles.recordButtonLabel}
-            onPress={() => recording ? onStopRecord() : onStartRecord()}
-          >{recording ? "Stop" : "Start"}</Button>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.container}>
+      <Title style={styles.titleText}>Authorize your voiceprint</Title>
+      <Text style={styles.instructions}>Press the button below to start recording your voice.</Text>
+      <Text style={styles.instructions}>Press the button again to stop recording.</Text>
+      <Text style={styles.instructions}>Your voice will be compared with your previously registered voiceprint.</Text>
+      <TouchableOpacity style={styles.recordOverlay} >
+        <Button
+          mode="contained"
+          style={styles.recordButton}
+          labelStyle={styles.recordButtonLabel}
+          onPress={() => recording ? onStopRecord() : onStartRecord()}
+        >{recording ? "Stop" : "Start"}</Button>
+      </TouchableOpacity>
+    </View>
   );
 }
 
