@@ -19,10 +19,10 @@ export default function AuthStack() {
       <Stack.Navigator initialRouteName="Login" screenOptions={globalScreenOptions}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
-		<Stack.Screen name="VoiceEnroll" component={VoiceEnrollScreen} />
+		    <Stack.Screen name="VoiceEnroll" component={VoiceEnrollScreen} />
         <Stack.Screen name="VoiceAuth" component={VoiceAuthScreen} />
-      <Stack.Screen name="Message" component={MessagesScreen} />    
-		  <Stack.Screen name="Chat" component={ChatScreen} options={({route})=>({title: route.params.userName})}/>
+        <Stack.Screen name="Message" component={MessagesScreen} />    
+		    <Stack.Screen name="Chat" component={ChatScreen} options={({route})=>({title: route.params.userName})}/>
       </Stack.Navigator>
   );
 }
