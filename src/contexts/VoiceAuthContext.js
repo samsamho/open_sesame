@@ -10,7 +10,6 @@ const VoiceAuthContextProvider = ({ children }) => {
 
   const audioRecorderPlayer = new AudioRecorderPlayer()
 
-  
   const onStartRecord = async () => {
     setRecording(true)
     const result = await audioRecorderPlayer.startRecorder();

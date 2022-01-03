@@ -55,6 +55,14 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.navButtonText}
             onPress={() => navigation.navigate('VoiceEnroll')}
         > Temporary Dev Button (for SV Enroll) </Button>
+        <Button
+            mode="text"
+            uppercase={false}
+            style={styles.button}
+            contentStyle={styles.buttonContainer}
+            labelStyle={styles.navButtonText}
+            onPress={() => navigation.navigate('VoiceVerification')}
+        > Temporary Dev Button (for SV Auth) </Button>
       </View>
   );
 }
@@ -83,9 +91,6 @@ const styles = StyleSheet.create({
   },
   loginButtonLabel: {
     fontSize: 22,
-  },
-  navButtonText: {
-    fontSize: 16,
   },
   titleText: {
     fontSize: 24,

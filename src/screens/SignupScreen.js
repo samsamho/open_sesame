@@ -88,19 +88,12 @@ export default function SignupScreen({ navigation }) {
             mode="contained"
             style={styles.button}
             contentStyle={styles.buttonContainer}
-            labelStyle={styles.loginButtonLabel}
+            labelStyle={styles.signupButtonLabel}
             onPress={async () => {
               if (validateEmail() && validatePassword())
                 handleRegister()
             }}
         >Sign Up</Button>
-        <IconButton
-            color="#5b3a70"
-            onPress={() => navigation.goBack()}
-            icon="keyboard-backspace"
-            size={30}
-            style={styles.navButton}
-        />
       </View>
   );
 }
@@ -108,9 +101,6 @@ export default function SignupScreen({ navigation }) {
 const { width, height } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
-  formButton: {
-    marginTop: 10,
-  },
   buttonContainer: {
     width: width / 3,
     height: height / 15,
@@ -127,14 +117,11 @@ const styles = StyleSheet.create({
     width: width / 2,
     height: height / 15,
   },
-  loginButtonLabel: {
+  signupButtonLabel: {
     fontSize: 22,
   },
   titleText: {
     fontSize: 24,
     marginBottom: 10,
-  },
-  navButton: {
-    marginTop: 10,
   },
 });
