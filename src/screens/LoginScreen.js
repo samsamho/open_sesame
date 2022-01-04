@@ -1,14 +1,33 @@
 import React, { useContext, useState } from 'react';
 import { Alert, Dimensions, StyleSheet, View } from 'react-native';
-import { Button, Title, TextInput } from 'react-native-paper';
+import { Button, Text, Title, TextInput } from 'react-native-paper';
 
 import { AccountAuthContext } from '../contexts/AccountAuthContext'
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginText, setLoginText] = useState('');
 
   const { login } = useContext(AccountAuthContext)
+
+  const handleLogin = (email, password) => {
+    login(email, password).then(({ userCredential, errorCode, errorMessage }) => {
+      if (userCredential) {
+        navigation.navigate('Message')
+      }
+      else {
+        // switch (errorCode) {
+        //   case "auth/email-already-in-use":
+        //     setLoginText("This email is already registered! If you forgot your password, please reset your password in the login page.")
+        //     break
+        //   default:
+        //     setLoginText("Login failed: " + errorMessage + " (Error Code: " + errorCode + ")")
+        // }
+        navigation.navigate('Message')
+      }
+    })
+  }
 
   return (
       <View style={styles.container}>
@@ -35,10 +54,11 @@ export default function LoginScreen({ navigation }) {
             contentStyle={styles.buttonContainer}
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
-              login(email, password)
-              navigation.navigate('Chat')
+              handleLogin()
+>>>>>>> Stashed changes
             }}
         > Login </Button>
+        <Text>{ loginText }</Text>
         <Button
             mode="text"
             uppercase={false}
