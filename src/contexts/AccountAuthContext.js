@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export const AccountAuthContext = createContext();
 
@@ -23,10 +23,21 @@ const AccountAuthContextProvider = ({ children }) => {
             user,
             loading,
             login: async (email, password) => {
-              console.log(email, password)
+              const auth = getAuth();
+              let obj = {}
+              await signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                  setUser(userCredential.user)
+                })
+                .catch((error) => {
+                  obj.errorCode = error.code;
+                  obj.errorMessage = error.message;
+                });
+              return obj
+
             },
             register: async (displayName, email, password) => {
-              setLoading(true);
+              // setLoading(true);
               const auth = getAuth();
               let obj = {}
               await createUserWithEmailAndPassword(auth, email, password)
@@ -35,9 +46,10 @@ const AccountAuthContextProvider = ({ children }) => {
                   setUser(userCredential.user)
                 })
                 .catch((error) => {
-                  obj.error = error
+                  obj.errorCode = error.code;
+                  obj.errorMessage = error.message;
                 });
-              setLoading(false);
+              // setLoading(false);
               return obj
             },
             logout: async () => {

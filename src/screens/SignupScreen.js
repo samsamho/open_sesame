@@ -36,17 +36,17 @@ export default function SignupScreen({ navigation }) {
   }
 
   const handleRegister = () => {
-    register(displayName, email, password1).then(({ userCredential, error }) => {
+    register(displayName, email, password1).then(({ userCredential, errorCode, errorMessage }) => {
       if (userCredential) {
         setSignupText("Sign up success. Please check your email for verification.")
       }
       else {
-        switch (error.code) {
+        switch (errorCode) {
           case "auth/email-already-in-use":
             setSignupText("This email is already registered! If you forgot your password, please reset your password in the login page.")
             break
           default:
-            setSignupText("Signup failed: " + error.code)
+            setSignupText("Signup failed: " + errorMessage + " (Error Code: " + errorCode + ")")
         }
       }
     })
