@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "39815518069",
+    "firebase_url": "https://open-sesame-ebca1-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "open-sesame-ebca1",
     "storage_bucket": "open-sesame-ebca1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:39815518069:android:cefc312fb39075e99ca53c",
+        "mobilesdk_app_id": "1:39815518069:android:826bcd57f0013ddd9ca53c",
         "android_client_info": {
           "package_name": "com.opensesame"
         }
