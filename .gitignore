@@ -51,6 +51,8 @@ local.properties
 
 # node.js
 #
+package-lock.json
+yarn.lock
 node_modules/
 npm-debug.log
 yarn-error.log
