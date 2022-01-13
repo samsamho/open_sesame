@@ -9,7 +9,7 @@ const Messages = [
 //      userImg: require('../assets/users/user-3.jpg'),
 
       message:{
-        _id: '1',
+        _id: 1,
         text: 'Hey there, this is my test for a post of my social app in React Native.',
         createdAt: new Date(),
         user: {
@@ -25,11 +25,11 @@ const Messages = [
       userName: 'John Doe',
  //     userImg: require('../assets/users/user-1.jpg'),
       message:{
-      _id: '1',
+      _id: 1,
       text: 'Hey there, this is my test for a post of my social app in React Native.',
       createdAt: new Date(),
       user: {
-      _id: '3',
+      _id: 3,
       name: 'React Native',
       avatar: 'https://placeimg.com/140/140/any',
     },
@@ -48,7 +48,7 @@ export default function MessageScreen({navigation }) {
             renderItem={({item}) => (
             <TouchableOpacity 
             style = {styles.Profile}
-            onPress={() => navigation.navigate('Chat', {userName: item.userName, messages: item.message})}>
+            onPress={() => navigation.navigate('Chat', {userName: item.userName, messages: item.message, userID: item.message.user._id})}>
               <View style={styles.UserInfo}>
                 <View style={styles.ImgWrapper}>
                    <Image

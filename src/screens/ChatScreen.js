@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useLayoutEffect } from 'react'
 import { StyleSheet, TouchableOpacity, Image, View, Text} from 'react-native'
 import { GiftedChat, Bubble, MessageText, Send} from 'react-native-gifted-chat'
+import { collection, addDoc, orderBy, query, onSnapshot, where, getDocs, getDoc } from '@firebase/firestore';
+import { signOut } from '@firebase/auth';
+import {auth, database} from '../config/firebase'
 
-
-export default function ChatScreen({navigation, route}) {
+export default function ChatScreen({navigation,route}) {
   
   const [messages, setMessages] = useState([
     /*
@@ -11,19 +13,49 @@ export default function ChatScreen({navigation, route}) {
       _id: 1,
       text: 'Hello developer',
       createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: 'React Native',
-        avatar: 'https://placeimg.com/140/140/any',
-      },
+      user: 2,
       locked:true,
     },*/
-    route.params.messages
+    
   ]);
-  
+
+ 
+  useLayoutEffect(() => {
+    const collectionRef = collection(database, 'chats');
+    const q = query(collectionRef,  where('_id', '==',route.params.userID ), where ('_rid', '==', 1));
+    console.log(q)
+    const unsubscribe = onSnapshot(q, querySnapshot => {
+      setMessages(
+        querySnapshot.docs.map(doc => ({
+          _id: doc.data()._id,
+          createdAt: doc.data().createdAt.toDate(),
+          text: doc.data().text,
+          user: doc.data().user,
+          locked: doc.data().locked
+        }))
+      );
+    });
+
+  return unsubscribe;
+  });
+
   const onSend = useCallback((messages = []) => {
-    messages.locked = true;
+    
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    const {id,  createdAt, text, user} = messages[0]
+    const _id = route.params.userID
+    const _rid = user._id 
+    const _cid = _rid + _id
+    const locked = false
+    addDoc(collection(database, 'chats'), {
+      _id,
+      _rid,
+      _cid,
+      createdAt,
+      text,
+      user,
+      locked
+    });
   }, [])
  
 
