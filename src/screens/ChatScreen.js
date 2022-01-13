@@ -14,7 +14,8 @@ export default function ChatScreen({navigation,route}) {
     const collectionRef = collection(database, 'chats');
     // (id == userID AND rid == 1) OR (id == 1 AND rid == userID)
     const q = query(collectionRef, 
-      where('sender_id_pair', 'in',[[route.params.userID, 1], [1, route.params.userID]])
+      where('sender_id_pair', 'in',[[route.params.userID, 1], [1, route.params.userID]]),
+      orderBy('createdAt','desc')
     );
     const unsubscribe = onSnapshot(q, querySnapshot => {
       setMessages(
