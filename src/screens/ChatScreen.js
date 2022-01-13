@@ -1,29 +1,49 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useLayoutEffect } from 'react'
 import { StyleSheet, TouchableOpacity, Image, View, Text} from 'react-native'
 import { GiftedChat, Bubble, MessageText, Send} from 'react-native-gifted-chat'
+import firestore from '@react-native-firebase/firestore';
 
+export default function ChatScreen({navigation,route}) {
+  
+  const [messages, setMessages] = useState([]);
 
-export default function ChatScreen({navigation, route}) {
-  
-  const [messages, setMessages] = useState([
-    /*
-    {
-      _id: 1,
-      text: 'Hello developer',
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: 'React Native',
-        avatar: 'https://placeimg.com/140/140/any',
-      },
-      locked:true,
-    },*/
-    route.params.messages
-  ]);
-  
+  useLayoutEffect(() => {
+    const subscriber = firestore()
+      .collection('chats')
+      .where('sender_id_pair', 'in',[[route.params.userID, 1], [1, route.params.userID]])
+      .onSnapshot(querySnapshot => {
+        setMessages(
+          querySnapshot.docs.map(doc => ({
+            _id: doc.data()._id,
+            sender_id: doc.data().sender_id,
+            _rid: doc.data()._rid,
+            createdAt: doc.data().createdAt.toDate(),
+            text: doc.data().text,
+            user: doc.data().user,
+            locked: doc.data().locked
+          }))
+        );
+      });
+    return subscriber;
+  });
+
   const onSend = useCallback((messages = []) => {
-    messages.locked = true;
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    const {_id, createdAt, text, user} = messages[0]
+    const sender_id_pair = [user._id, route.params.userID]
+    const sender_id = user._id
+    const _rid = route.params.userID
+    const locked = false
+    firestore().collection('chats').add({
+      _id,
+      sender_id,
+      _rid,
+      sender_id_pair,
+      createdAt,
+      text,
+      user,
+      locked
+    });
   }, [])
  
 
@@ -59,8 +79,8 @@ export default function ChatScreen({navigation, route}) {
       </Send>
     </View>
   )
+
   return (
-   
     <GiftedChat
       renderMessageText = {renderMessageText}
       renderSend = {renderSend}
