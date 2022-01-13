@@ -7,27 +7,21 @@ import {auth, database} from '../config/firebase'
 
 export default function ChatScreen({navigation,route}) {
   
-  const [messages, setMessages] = useState([
-    /*
-    {
-      _id: 1,
-      text: 'Hello developer',
-      createdAt: new Date(),
-      user: 2,
-      locked:true,
-    },*/
-    
-  ]);
+  const [messages, setMessages] = useState([]);
 
  
   useLayoutEffect(() => {
     const collectionRef = collection(database, 'chats');
-    const q = query(collectionRef,  where('_id', '==',route.params.userID ), where ('_rid', '==', 1));
-    console.log(q)
+    // (id == userID AND rid == 1) OR (id == 1 AND rid == userID)
+    const q = query(collectionRef, 
+      where('sender_id_pair', 'in',[[route.params.userID, 1], [1, route.params.userID]])
+    );
     const unsubscribe = onSnapshot(q, querySnapshot => {
       setMessages(
         querySnapshot.docs.map(doc => ({
           _id: doc.data()._id,
+          sender_id: doc.data().sender_id,
+          _rid: doc.data()._rid,
           createdAt: doc.data().createdAt.toDate(),
           text: doc.data().text,
           user: doc.data().user,
@@ -42,15 +36,16 @@ export default function ChatScreen({navigation,route}) {
   const onSend = useCallback((messages = []) => {
     
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    const {id,  createdAt, text, user} = messages[0]
-    const _id = route.params.userID
-    const _rid = user._id 
-    const _cid = _rid + _id
+    const {_id, createdAt, text, user} = messages[0]
+    const sender_id_pair = [user._id, route.params.userID]
+    const sender_id = user._id
+    const _rid = route.params.userID
     const locked = false
     addDoc(collection(database, 'chats'), {
       _id,
+      sender_id,
       _rid,
-      _cid,
+      sender_id_pair,
       createdAt,
       text,
       user,
