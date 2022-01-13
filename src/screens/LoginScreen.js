@@ -11,20 +11,19 @@ export default function LoginScreen({ navigation }) {
 
   const { login } = useContext(AccountAuthContext)
 
-  const handleLogin = (email, password) => {
+  const handleLogin = () => {
     login(email, password).then(({ userCredential, errorCode, errorMessage }) => {
       if (userCredential) {
         navigation.navigate('Message')
       }
       else {
-        // switch (errorCode) {
-        //   case "auth/email-already-in-use":
-        //     setLoginText("This email is already registered! If you forgot your password, please reset your password in the login page.")
-        //     break
-        //   default:
-        //     setLoginText("Login failed: " + errorMessage + " (Error Code: " + errorCode + ")")
-        // }
-        navigation.navigate('Message')
+        switch (errorCode) {
+          case "auth/email-already-in-use":
+            setLoginText("This email is already registered! If you forgot your password, please reset your password in the login page.")
+            break
+          default:
+            setLoginText("Login failed: " + errorMessage + " (Error Code: " + errorCode + ")")
+        }
       }
     })
   }
@@ -54,7 +53,10 @@ export default function LoginScreen({ navigation }) {
             contentStyle={styles.buttonContainer}
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
-              handleLogin()
+              if (email && password)
+                handleLogin()
+              else
+                setLoginText("Please enter both email and password!")
             }}
         > Login </Button>
         <Text>{ loginText }</Text>
