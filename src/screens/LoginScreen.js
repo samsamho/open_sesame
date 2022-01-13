@@ -55,7 +55,6 @@ export default function LoginScreen({ navigation }) {
             labelStyle={styles.loginButtonLabel}
             onPress={() => {
               handleLogin()
->>>>>>> Stashed changes
             }}
         > Login </Button>
         <Text>{ loginText }</Text>
