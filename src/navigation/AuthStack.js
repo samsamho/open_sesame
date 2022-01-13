@@ -4,6 +4,7 @@ import React from 'react'
 import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 import ChatScreen from '../screens/ChatScreen';
+import MessageScreen from '../screens/MessageScreen';
 import VoiceEnrollScreen from '../screens/VoiceEnrollScreen'
 import VoiceVerificationScreen from '../screens/VoiceVerificationScreen'
 
@@ -22,6 +23,7 @@ export default function AuthStack() {
         <Stack.Screen name="VoiceEnroll" component={VoiceEnrollScreen} />
         <Stack.Screen name="VoiceVerification" component={VoiceVerificationScreen} />
         <Stack.Screen name="Chat" component={ChatScreen}/>
+        <Stack.Screen name="Message" component={MessageScreen}/>
       </Stack.Navigator>
   );
 }

@@ -6,65 +6,64 @@ const Messages = [
   {
     userName: 'Jenny Doe',
 //      userImg: require('../assets/users/user-3.jpg'),
-    id: '1',
-    message:{
-      _id: '1',
-      text: 'Hey there, this is my test for a post of my social app in React Native.',
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: 'React Native',
-        avatar: 'https://placeimg.com/140/140/any',
-      },
-      locked:false,
+      message:{
+        _id: 1,
+        text: 'Hey there, this is my test for a post of my social app in React Native.',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+        locked:false,
+
     },
   },
   {
     userName: 'John Doe',
  //     userImg: require('../assets/users/user-1.jpg'),
-    id: '2',
     message:{
-      _id: '1',
+      _id: 1,
       text: 'Hey there, this is my test for a post of my social app in React Native.',
       createdAt: new Date(),
       user: {
-        _id: '3',
+        _id: 3,
         name: 'React Native',
         avatar: 'https://placeimg.com/140/140/any',
       },
-      locked:true,
+    locked:true,
     },
+   
   },
 ]
 
 export default function MessageScreen({navigation }) {
   return (
-    <View style={styles.container}>
-      <FlatList
-        data ={Messages}
-        keyExtractor={item=>item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity 
+        <View style={styles.container}>
+            <FlatList
+            data ={Messages}
+            keyExtractor={item=>item.id}
+            renderItem={({item}) => (
+            <TouchableOpacity 
             style = {styles.profile}
-            onPress={() => navigation.navigate('Chat', {userName: item.userName, messages: item.message})}
-          >
-            <View style={styles.userInfo}>
-              <View style={styles.imgWrapper}>
-                <Image
-                  style={styles.userImg}
-                  source={item.message.user.avatar}
-                />
-              </View>
-              <View style={styles.textSection}>
-                <Text style = {styles.userName}> {item.userName}</Text>
-              </View>
-            </View>   
-          </TouchableOpacity>
-        )}
-      >
-      </FlatList>
-    </View>
-  );
+            onPress={() => navigation.navigate('Chat', {userName: item.userName, messages: item.message, userID: item.message.user._id})}>
+              <View style={styles.userInfo}>
+                <View style={styles.imgWrapper}>
+                   <Image
+                    style={styles.UserImg}
+                    source={item.message.user.avatar}
+                    />
+                </View>
+                <View style={styles.TextSection}>
+                  <Text style = {styles.UserName}> {item.userName}</Text>
+                </View>
+              </View>   
+            </TouchableOpacity>
+            )}
+            >
+          </FlatList>
+        </View>
+    );
 };
 
 

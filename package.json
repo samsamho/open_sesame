@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-firebase/app": "^14.2.2",
     "@react-native-firebase/auth": "^14.2.2",
+    "@react-native-firebase/firestore": "^14.2.2",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "dayjs": "^1.10.7",
