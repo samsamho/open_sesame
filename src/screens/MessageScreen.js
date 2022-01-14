@@ -50,12 +50,12 @@ export default function MessageScreen({navigation }) {
               <View style={styles.userInfo}>
                 <View style={styles.imgWrapper}>
                    <Image
-                    style={styles.UserImg}
+                    style={styles.userImg}
                     source={item.message.user.avatar}
                     />
                 </View>
-                <View style={styles.TextSection}>
-                  <Text style = {styles.UserName}> {item.userName}</Text>
+                <View style={styles.textSection}>
+                  <Text style = {styles.userName}> {item.userName}</Text>
                 </View>
               </View>   
             </TouchableOpacity>

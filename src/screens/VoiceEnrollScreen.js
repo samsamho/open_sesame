@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Button, Title } from 'react-native-paper'
-// const Compute = require('@google-cloud/compute');
 
 import { VoiceAuthContext } from '../contexts/VoiceAuthContext'
 
 
 export default function VoiceEnrollScreen({ navigation }) {
-  // const compute = new Compute();
   const { recording, recordSecs, recordTime, onStartRecord, onStopRecord } = useContext(VoiceAuthContext)
 
   return (
@@ -24,6 +22,10 @@ export default function VoiceEnrollScreen({ navigation }) {
             onPress={() => recording ? onStopRecord() : onStartRecord()}
           >{recording ? "Stop" : "Start"}</Button>
         </TouchableOpacity>
+        <Button
+            mode="contained"
+            onPress={() => console.log("hi")}
+          >Click me</Button>
       </View>
   );
 }

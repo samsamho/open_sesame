@@ -10,27 +10,23 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@google-cloud/compute": "^3.1.0",
-    "@google-cloud/storage": "^5.17.0",
+    "@babel/preset-env": "7.16.8",
     "@react-native-firebase/app": "^14.2.2",
     "@react-native-firebase/auth": "^14.2.2",
     "@react-native-firebase/firestore": "^14.2.2",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "dayjs": "^1.10.7",
-    "path": "^0.12.7",
-    "querystring": "^0.2.1",
+    "fbjs": "^3.0.2",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-audio-recorder-player": "^3.3.3",
-    "react-native-gesture-handler": "^2.1.1",
+    "react-native-gesture-handler": "1.4.0",
     "react-native-gifted-chat": "^0.16.3",
     "react-native-paper": "^4.11.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
-    "react-native-vector-icons": "^9.0.0",
-    "stream": "^0.0.2",
-    "util": "^0.12.4"
+    "react-native-vector-icons": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

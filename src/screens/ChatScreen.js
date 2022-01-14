@@ -11,6 +11,7 @@ export default function ChatScreen({navigation,route}) {
     const subscriber = firestore()
       .collection('chats')
       .where('sender_id_pair', 'in',[[route.params.userID, 1], [1, route.params.userID]])
+      .orderBy('createdAt','desc')
       .onSnapshot(querySnapshot => {
         setMessages(
           querySnapshot.docs.map(doc => ({
